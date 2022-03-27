@@ -2,11 +2,12 @@ package devices;
 
 import java.time.LocalDateTime;
 
-public class Car extends Device {
+public abstract class Car extends Device {
 
     public int weight;
     public LocalDateTime ManufactureDate;
     public int value;
+    public boolean isTankFull;
 
     public Car(String name, String make, String fromCountry) {
         super(name, make, fromCountry);
@@ -14,6 +15,8 @@ public class Car extends Device {
         Make = make;
         FromCountry = fromCountry;
     }
+
+    public abstract void refuel();
 
     public void setValue(int value) {
         this.value = value;

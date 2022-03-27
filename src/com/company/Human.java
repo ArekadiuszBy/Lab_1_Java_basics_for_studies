@@ -1,17 +1,43 @@
 package com.company;
 
+import creatures.Animal;
 import devices.Car;
+import devices.Phone;
 
 import java.time.LocalDateTime;
 
 public class Human {
 
-    private Car owner;
+    private Car car;
+    private Phone phone;
+    private Animal animal;
     private Double salary;
+    public Double cash;
+    public boolean hasAnimal;
+    public boolean hasCar;
+    public boolean hasPhone;
+    public boolean wantsAnimal;
+    public boolean wantsCar;
+    public boolean wantsPhone;
+    public boolean wantsHuman;
+
+    public Human(){
+        this.cash = 1300d;
+        this.salary = 1300d;
+    }
 
     public Human(Car car){
-        this.owner = car;
+        this.car = car;
         this.salary = 0d;
+    }
+
+    public Human(Phone phone){
+        this.phone = new Phone("Samsung", "Note", 1200d);
+        this.hasPhone = true;
+    }
+
+    public Human(Animal animal){
+        this.hasAnimal = true;
     }
 
     public boolean canBuy() {
@@ -20,15 +46,15 @@ public class Human {
             return false;
         }
 
-        if (this.owner.value == 0) {
+        if (this.car.value == 0) {
             System.out.println("Brak wartości auta");
             return false;
         }
 
-        if (this.salary > owner.value){
+        if (this.salary > car.value){
             System.out.println("Kupiono za gotówkę");
             return true;
-        } else if (this.salary*12 >= owner.value){
+        } else if (this.salary*12 >= car.value){
             System.out.println("Kupiono na kredyt");
             return true;
         }
@@ -37,8 +63,21 @@ public class Human {
         return false;
     }
 
+    public boolean canBuyPhone(Human seller) {
+        if (this.cash == 0 || this.cash == null) {
+            System.out.println("Brak kasy");
+            return false;
+        }
+
+        if (this.cash > seller.phone.Value){
+            return true;
+        }
+
+        return false;
+    }
+
     public Car getCar() {
-        return this.owner;
+        return this.car;
     }
 
     public LocalDateTime getSalary() {

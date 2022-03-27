@@ -1,6 +1,9 @@
-package com.company;
+package creatures;
 
-public class Animal {
+import com.company.Human;
+import com.company.Salleable;
+
+public abstract class Animal implements Salleable, Feedable {
 
     final String species;
     private Double weight;
@@ -37,4 +40,18 @@ public class Animal {
         }
     }
 
+    // Phone
+    @Override
+    public boolean sell(Human seller, Human buyer, Double price) {
+        if (seller.hasAnimal || seller.hasCar || seller.hasPhone || !buyer.wantsHuman) {
+            if (buyer.canBuyPhone(seller) && buyer.wantsPhone) {
+                seller.cash += buyer.cash;
+                buyer.cash -= seller.cash;
+                return true;
+            }
+        }
+
+        return false;
+
+    }
 }
