@@ -14,10 +14,6 @@ public class Human {
         this.salary = 0d;
     }
 
-    public static void main(String[] args) {
-	// write your code here
-    }
-
     public boolean canBuy() {
         if (this.salary == 0 || this.salary == null) {
             System.out.println("Brak przypisanej wypłaty");

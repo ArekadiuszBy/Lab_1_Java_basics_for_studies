@@ -2,14 +2,14 @@ package devices;
 
 import java.time.LocalDateTime;
 
-public class Car {
+public class Car extends Device {
 
-    public final String Name, Make, FromCountry;
     public int weight;
     public LocalDateTime ManufactureDate;
     public int value;
 
     public Car(String name, String make, String fromCountry) {
+        super(name, make, fromCountry);
         Name = name;
         Make = make;
         FromCountry = fromCountry;
@@ -17,10 +17,6 @@ public class Car {
 
     public void setValue(int value) {
         this.value = value;
-    }
-
-    public static void main(String[] args) {
-	// write your code here
     }
 
     @Override public boolean equals(Object obj)
@@ -37,5 +33,11 @@ public class Car {
         return this.Make.equals(car.Make)
                 && this.Name.equals(car.Name)
                 && this.FromCountry.equals(car.FromCountry);
+    }
+
+
+    @Override
+    public void turnOn() {
+        this.isOn = true;
     }
 }

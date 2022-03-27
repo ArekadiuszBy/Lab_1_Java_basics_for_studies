@@ -1,8 +1,13 @@
 package devices;
 
-public class Phone {
+public class Phone extends Device  {
 
-    public static void main(String[] args) {
-	// write your code here
+    protected Phone(String name, String make, String fromCountry) {
+        super(name, make, fromCountry);
+    }
+
+    @Override
+    public void turnOn() {
+        this.isOn = true;
     }
 }

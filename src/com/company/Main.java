@@ -60,6 +60,8 @@ public class Main {
 
         // Zad 7
         System.out.println("\n Zad 7");
+        car.turnOn();
+        System.out.println("Is car running: " + (car.isOn ? "Yes" : "No") + ",\nis car2 running: " + (car2.isOn ? "Yes" : "No"));
 
         // Zad 8
         System.out.println("\n Zad 8");
