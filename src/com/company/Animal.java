@@ -27,12 +27,13 @@ public class Animal {
         }
     }
 
-    public void takeForAWalk() {
+    public void takeForAWalk(int i) {
         if(this.weight <= 0) {
             System.out.println("Zwierze nie żyje!");
         } else {
             this.weight -= 0.5;
-            System.out.println("Spacer " + this.weight);
+            if (i < 2 || i > 8)
+                System.out.println("Spacer " + this.weight);
         }
     }
 
