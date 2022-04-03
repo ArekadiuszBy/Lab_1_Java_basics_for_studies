@@ -10,6 +10,10 @@ public abstract class Device implements Salleable {
     public double Value;
     public boolean isOn = false;
 
+    public Device (double value) {
+        Value = value;
+    }
+
     protected Device(String name, String make, String fromCountry) {
         Name = name;
         Make = make;

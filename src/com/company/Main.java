@@ -3,6 +3,7 @@ package com.company;
 import creatures.Animal;
 import devices.Car;
 import devices.Diesel;
+import devices.LPG;
 import devices.Phone;
 
 import java.net.MalformedURLException;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         var animal = new Animal("Kot", 5d) {
             @Override
             public void feed(double foodWeight) {
@@ -32,25 +33,29 @@ public class Main {
 
         // Zad 2
         System.out.println("\n Zad 2");
-        var car = new Car("Forester", "Subaru", "Japan") {
+        Car[] car = new Car[1];
+        car[0] = new Car("Forester", "Subaru", "Japan") {
             @Override
             public void refuel() {
                 isTankFull = true;
             }
         };
-        var car2 = new Car("Forester", "Subaru", "Japan") {
+
+        Car[] car2 = new Car[1];
+        car2[0] = new Car("Forester", "Subaru", "Japan") {
             @Override
             public void refuel() {
                 isTankFull = true;
             }
         };
+
         var human = new Human(car);
 
-        var owner = human.getCar();
-        owner.ManufactureDate = LocalDateTime.now();
+        var owner = human.getCar(1);
+        owner[0].ManufactureDate = LocalDateTime.now();
 
-        System.out.println("Country " + owner.FromCountry + " Make " + owner.Make + " Name "
-                + owner.Name + " Day of year " + owner.ManufactureDate.getDayOfYear() + " Weight " + owner.weight);
+        System.out.println("Country " + owner[0].FromCountry + " Make " + owner[0].Make + " Name "
+                + owner[0].Name + " Day of year " + owner[0].ManufactureDate.getDayOfYear() + " Weight " + owner[0].weight);
 
         // Zad 3 + 4
         System.out.println("\n Zad 3 + 4");
@@ -61,12 +66,12 @@ public class Main {
         // Zad 5
         System.out.println("\n Zad 5");
         human.canBuy();
-        car.setValue(100);
+        car[0].setValue(100);
         human.canBuy();
 
         // Zad 6
         System.out.println("\n Zad 6");
-        car2.setValue(100);
+        car2[0].setValue(100);
 
         // == doesn't work when we've got abstract classes
 //        if (car == car2) {
@@ -89,8 +94,8 @@ public class Main {
 
         // Zad 7
         System.out.println("\n Zad 7");
-        car.turnOn();
-        System.out.println("Is car running: " + (car.isOn ? "Yes" : "No") + ",\nis car2 running: " + (car2.isOn ? "Yes" : "No"));
+        car[0].turnOn();
+        System.out.println("Is car running: " + (car[0].isOn ? "Yes" : "No") + ",\nis car2 running: " + (car2[0].isOn ? "Yes" : "No"));
 
         // Zad 8
         System.out.println("\n Zad 8");
@@ -98,6 +103,7 @@ public class Main {
         var phone = new Phone("99", "DaPhone", 1200d);
         var humanWithPhone = new Human(phone);
         humanWithPhone.cash = -500d;
+        var seller = new Human();
         var buyer = new Human();
 
         buyer.wantsPhone = true;
@@ -143,10 +149,10 @@ public class Main {
         }
         phone.getAllData();
 
-        System.out.println("Is diesel tank full? " + car.isTankFull);
+        System.out.println("Is diesel tank full? " + car[0].isTankFull);
         System.out.println("Refuelling... ");
-        car.refuel();
-        System.out.println("Is diesel tank full? " + car.isTankFull);
+        car[0].refuel();
+        System.out.println("Is diesel tank full? " + car[0].isTankFull);
 
         // Add Diesel car
 
@@ -161,6 +167,50 @@ public class Main {
         // Zad 11
         System.out.println("\n Zad 11");
 
+        var garage = new Car[2];
+        garage[0] = new Diesel("AutoA", "NameA", "CountryA");
+        garage[1] = new LPG("AutoB", "NameB", "CountryB");
+        var index = 0;
+        for (var i : garage) {
+            index++;
+            i.value = (index) * 2000;
+            if (index % 2 == 0) {
+                i.isTankFull = true;
+                i.isOn = true;
+            } else {
+                i.isTankFull = false;
+                i.isOn = false;
+            }
+        }
+
+        System.out.println("Garage value: " + buyer.GarageValue(garage));
+
+        System.out.println("Cars transactions: " + buyer.GarageValue(garage));
+
+        var wantedCar2 = "AutoC";
+        var hasBuyerSpace2 = false;
+        Car.sellCar(garage, wantedCar2, hasBuyerSpace2, buyer.cash, garage[1].Value);
+
+        var wantedCar = "AutoA";
+        var hasBuyerSpace = true;
+        var carValue = garage[0].value;
+        Car.sellCar(garage, wantedCar, hasBuyerSpace, buyer.cash, garage[0].Value);
+
+        int indexx = 0, carIndex = 0;
+        for (var i : garage) {
+            if (i == null) {
+                seller.cash += carValue;
+                buyer.cash -= carValue;
+            }
+
+            indexx++;
+        }
+
+        System.out.println("Seller money: " + seller.cash);
+        System.out.println("Buyer money: " + buyer.cash);
+
+
+        ;
         // Zad 12
         System.out.println("\n Zad 12");
 

@@ -2,6 +2,7 @@ package creatures;
 
 import com.company.Human;
 import com.company.Salleable;
+import devices.Car;
 
 public abstract class Animal implements Salleable, Feedable {
 
@@ -39,8 +40,7 @@ public abstract class Animal implements Salleable, Feedable {
                 System.out.println("Spacer " + this.weight);
         }
     }
-
-    // Phone
+    
     @Override
     public boolean sell(Human seller, Human buyer, Double price) {
         if (seller.hasAnimal || seller.hasCar || seller.hasPhone || !buyer.wantsHuman) {
@@ -52,6 +52,5 @@ public abstract class Animal implements Salleable, Feedable {
         }
 
         return false;
-
     }
 }

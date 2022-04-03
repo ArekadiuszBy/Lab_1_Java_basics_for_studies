@@ -2,13 +2,14 @@ package com.company;
 
 import creatures.Animal;
 import devices.Car;
+import devices.Device;
 import devices.Phone;
 
 import java.time.LocalDateTime;
 
 public class Human {
 
-    private Car car;
+    private Car garage[];
     private Phone phone;
     private Animal animal;
     private Double salary;
@@ -26,8 +27,13 @@ public class Human {
         this.salary = 1300d;
     }
 
-    public Human(Car car){
-        this.car = car;
+    public Human(Car[] garage){
+        this.garage = garage;
+        this.salary = 0d;
+    }
+
+    public Human(Car[] garage, int garageSize){
+        this.garage = garage;
         this.salary = 0d;
     }
 
@@ -46,15 +52,15 @@ public class Human {
             return false;
         }
 
-        if (this.car.value == 0) {
+        if (this.garage[0].value == 0) {
             System.out.println("Brak wartości auta");
             return false;
         }
 
-        if (this.salary > car.value){
+        if (this.salary > garage[0].value){
             System.out.println("Kupiono za gotówkę");
             return true;
-        } else if (this.salary*12 >= car.value){
+        } else if (this.salary*12 >= garage[0].value){
             System.out.println("Kupiono na kredyt");
             return true;
         }
@@ -76,8 +82,8 @@ public class Human {
         return false;
     }
 
-    public Car getCar() {
-        return this.car;
+    public Car[] getCar(int parkingNumber) {
+        return this.garage;
     }
 
     public LocalDateTime getSalary() {
@@ -95,4 +101,14 @@ public class Human {
 
         return null;
     }
+
+    public Double GarageValue(Car[] garage) {
+        double returnValue = 0;
+        for (var i : garage) {
+            returnValue += i.value;
+        }
+
+        return returnValue;
+    }
+
 }
