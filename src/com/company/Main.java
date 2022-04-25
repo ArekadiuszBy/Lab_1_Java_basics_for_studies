@@ -10,6 +10,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Main {
 
@@ -189,30 +191,67 @@ public class Main {
 
         var wantedCar2 = "AutoC";
         var hasBuyerSpace2 = false;
-        Car.sellCar(garage, wantedCar2, hasBuyerSpace2, buyer.cash, garage[1].Value);
+        var carXX = new Car("XX", "XXX", "Poland") {
+            @Override
+            public void refuel() {
+            }
+        };
+
+        carXX.sellCar(garage, wantedCar2, hasBuyerSpace2, buyer.cash, garage[1].Value, "CurrentOwner", "Andrzej");
 
         var wantedCar = "AutoA";
         var hasBuyerSpace = true;
         var carValue = garage[0].value;
-        Car.sellCar(garage, wantedCar, hasBuyerSpace, buyer.cash, garage[0].Value);
 
-        int indexx = 0, carIndex = 0;
+        var carYY = new Car("YY", "YYY", "Dnalop") {
+            @Override
+            public void refuel() {
+            }
+        };
+        carYY.sellCar(garage, wantedCar, hasBuyerSpace, buyer.cash, garage[0].Value, "CurrentOwner","Janusz");
+
         for (var i : garage) {
             if (i == null) {
                 seller.cash += carValue;
                 buyer.cash -= carValue;
             }
-
-            indexx++;
         }
 
         System.out.println("Seller money: " + seller.cash);
         System.out.println("Buyer money: " + buyer.cash);
 
 
-        ;
         // Zad 12
         System.out.println("\n Zad 12");
+        buyer.cash += 2000d;
+
+        var garage2 = new Car[2];
+        garage2[0] = new Diesel("AutoA", "NameA", "CountryA");
+        garage2[1] = new LPG("AutoB", "NameB", "CountryB");
+
+        var carFiat = new Car("Fiat", "Tiko", "ZSRR") {
+            @Override
+            public void refuel() {
+            }
+        };
+
+//        carFiat.setOwners(List.of("Wlasciciel1", "Wlasciciel2", "Wlasciciel3")); // Commented out, because it creates an immutable list
+        List<String> list = new ArrayList<>();
+        Collections.addAll(list, "Wlasciciel1", "Wlasciciel2", "Wlasciciel3");
+        carFiat.setOwners(list);
+        System.out.println("Current owners before selling: " + carFiat.getOwners());
+
+        carFiat.sellCar(garage2, wantedCar, hasBuyerSpace, buyer.cash, 1234d, "Wlasciciel3","Janusz");   // Not sold (money not okay)
+        carFiat.sellCar(garage2, wantedCar, hasBuyerSpace, buyer.cash, 124d, "Wlasciciel3","Janusz");    //Sold (money okay)
+
+        carFiat.setCurrentOwner();
+
+        System.out.println("All owners: " + carFiat.getOwners());
+        System.out.println("Current owner after selling: " + carFiat.getCurrentOwner());
+
+        var transactionVerification = carFiat.isCarSoldForRightPerson("Wlasciciel3", "Janusz");
+        System.out.println("Again validation - system.out.println (true/false): " + transactionVerification);
+
 
         // Zad 13
         System.out.println("\n Zad 13");
