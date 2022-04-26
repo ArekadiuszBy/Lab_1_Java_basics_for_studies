@@ -102,7 +102,7 @@ public class Main {
         // Zad 8
         System.out.println("\n Zad 8");
 
-        var phone = new Phone("99", "DaPhone", 1200d);
+        var phone = new Phone("99", "DaPhone", 1200d, 99999999999d);
         var humanWithPhone = new Human(phone);
         humanWithPhone.cash = -500d;
         var seller = new Human();
@@ -242,7 +242,7 @@ public class Main {
         System.out.println("Current owners before selling: " + carFiat.getOwners());
 
         carFiat.sellCar(garage2, wantedCar, hasBuyerSpace, buyer.cash, 1234d, "Wlasciciel3","Janusz");   // Not sold (money not okay)
-        carFiat.sellCar(garage2, wantedCar, hasBuyerSpace, buyer.cash, 124d, "Wlasciciel3","Janusz");    //Sold (money okay)
+        carFiat.sellCar(garage2, wantedCar, hasBuyerSpace, buyer.cash, 124d, "Wlasciciel3","Janusz");    // Sold (money okay)
 
         carFiat.setCurrentOwner();
 
@@ -255,6 +255,22 @@ public class Main {
 
         // Zad 13
         System.out.println("\n Zad 13");
+        phone.Money = 0;
+        phone.InstallAnApp(phone.Money, "aaa", "v.1.0", 123d);
+        System.out.println("Adding mani mani...");
+        phone.Money += 99999999999d;
+        phone.InstallAnApp(phone.Money, "aaa", "v.1.0", 123d);
+        phone.InstallAnApp(phone.Money, "bbb", "v.12.0", 1d);
+        phone.InstallAnApp(phone.Money, "acccaa", "v.13.0", 0);
+
+        phone.getAllAppsPricesInAscOrder();
+        phone.getAllAppsInAlphabeticOrder();
+        phone.getAllAppsValue();
+        phone.getAllData();
+
+        System.out.println(phone.CheckIfApplicationIsInstalled("aaa"));
+
+
 
     }
 }

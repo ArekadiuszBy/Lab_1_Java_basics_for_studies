@@ -8,6 +8,7 @@ public abstract class Device implements Salleable {
     public String Make;
     public String FromCountry;
     public double Value;
+    public double Money;
     public boolean isOn = false;
 
     public Device (double value) {
@@ -20,10 +21,11 @@ public abstract class Device implements Salleable {
         FromCountry = fromCountry;
     }
 
-    protected Device(String name, String make, double value) {
+    protected Device(String name, String make, double value, double money) {
         Name = name;
         Make = make;
         Value = value;
+        Money = money;
     }
 
     public String showClassToString() {

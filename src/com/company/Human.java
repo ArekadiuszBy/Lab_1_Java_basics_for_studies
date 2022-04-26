@@ -38,7 +38,7 @@ public class Human {
     }
 
     public Human(Phone phone){
-        this.phone = new Phone("Samsung", "Note", 1200d);
+        this.phone = new Phone("Samsung", "Note", 1200d, 99999999999d);
         this.hasPhone = true;
     }
 
